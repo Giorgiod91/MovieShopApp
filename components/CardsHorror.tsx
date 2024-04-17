@@ -83,14 +83,18 @@ export default function CardsHorror({
   };
   // My app is about buying movies so i use the random function to generate a random price for the movies from the fetched data
 
-  const generateRandomPrices = () => {
-    const prices = data.map(() => {
-      const priceInCents = Math.floor(Math.random() * 1401) + 100;
-      const formattedPrice = `$${(priceInCents / 100).toFixed(2)}`;
-      return formattedPrice;
-    });
-    setRandomPrices(prices);
-  };
+  useEffect(() => {
+    const generateRandomPrices = () => {
+      const prices = data.map(() => {
+        const priceInCents = Math.floor(Math.random() * 1401) + 100;
+        const formattedPrice = `$${(priceInCents / 100).toFixed(2)}`;
+        return formattedPrice;
+      });
+      setRandomPrices(prices);
+    };
+
+    generateRandomPrices();
+  }, [data]);
 
   // here i use my fetching function to get the data from the api i made in api/FetchingData.tsx
   useEffect(() => {

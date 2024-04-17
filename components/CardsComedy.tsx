@@ -83,14 +83,18 @@ export default function CardsComedy({
   };
   // My app is about buying movies so i use the random function to generate a random price for the movies from the fetched data
 
-  const generateRandomPrices = () => {
-    const prices = data.map(() => {
-      const priceInCents = Math.floor(Math.random() * 1401) + 100;
-      const formattedPrice = `$${(priceInCents / 100).toFixed(2)}`;
-      return formattedPrice;
-    });
-    setRandomPrices(prices);
-  };
+  useEffect(() => {
+    const generateRandomPrices = () => {
+      const prices = data.map(() => {
+        const priceInCents = Math.floor(Math.random() * 1401) + 100;
+        const formattedPrice = `$${(priceInCents / 100).toFixed(2)}`;
+        return formattedPrice;
+      });
+      setRandomPrices(prices);
+    };
+
+    generateRandomPrices();
+  }, [data]);
 
   // here i use the addToCart function to add the item to the cart and before that i check if the item is already in the cart if it is i dont add it again
   const handleShoppingCartClick = (index: number) => {

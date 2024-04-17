@@ -58,19 +58,19 @@ export default function Cards2({
     data.map(() => false)
   );
   // Function to add items to cart from localStorage
-  const addToCartFromStorage = (savedShoppingCart: any) => {
-    savedShoppingCart.forEach((savedCartItem: any) => {
-      addToCart(savedCartItem.item, savedCartItem.quantity);
-    });
-  };
-
   useEffect(() => {
+    const addToCartFromStorage = (savedShoppingCart: any) => {
+      savedShoppingCart.forEach((savedCartItem: any) => {
+        addToCart(savedCartItem.item, savedCartItem.quantity);
+      });
+    };
+
     const savedShoppingCart = localStorage.getItem("shoppingCart");
     if (savedShoppingCart) {
       const parsedShoppingCart = JSON.parse(savedShoppingCart);
       addToCartFromStorage(parsedShoppingCart);
     }
-  }, [addToCartFromStorage]); // Empty dependency array means this effect runs only once on mount
+  }, [addToCart]);
 
   // Save shopping card data to localStorage whenever it changes
   useEffect(() => {
