@@ -1,0 +1,13 @@
+.shoppingcardicon {
+    width: 50px;
+    height: 50px;
+    background-color: bisque;
+    clip-path: circle(70% at 0 0);
+    transition:  all 1s ease;
+}
+
+
+.shoppingcardicon:hover {
+    clip-path: circle(100%);
+    
+}
