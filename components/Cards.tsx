@@ -57,6 +57,12 @@ export default function Cards2({
   const [isFlippedArray, setIsFlippedArray] = useState<boolean[]>(
     data.map(() => false)
   );
+  // Function to add items to cart from localStorage
+  const addToCartFromStorage = (savedShoppingCart: any) => {
+    savedShoppingCart.forEach((savedCartItem: any) => {
+      addToCart(savedCartItem.item, savedCartItem.quantity);
+    });
+  };
 
   useEffect(() => {
     const savedShoppingCart = localStorage.getItem("shoppingCart");
@@ -64,19 +70,12 @@ export default function Cards2({
       const parsedShoppingCart = JSON.parse(savedShoppingCart);
       addToCartFromStorage(parsedShoppingCart);
     }
-  }, []); // Empty dependency array means this effect runs only once on mount
+  }, [addToCartFromStorage]); // Empty dependency array means this effect runs only once on mount
 
   // Save shopping card data to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   }, [shoppingCart]);
-
-  // Function to add items to cart from localStorage
-  const addToCartFromStorage = (savedShoppingCart: any) => {
-    savedShoppingCart.forEach((savedCartItem: any) => {
-      addToCart(savedCartItem.item, savedCartItem.quantity);
-    });
-  };
 
   const addToFavorites = (title: string) => {
     if (!favorites.includes(title)) {
@@ -183,7 +182,7 @@ export default function Cards2({
             const itemData = data.find((item) => item.title === cartItemTitle);
 
             return (
-              <div>
+              <div key={index}>
                 <li key={index}>
                   <div className=" text-2xl">{cartItemTitle}</div>
                   <br />

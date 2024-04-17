@@ -116,7 +116,7 @@ export default function CardsHorror({
 
   useEffect(() => {
     generateRandomPrices();
-  }, [data]);
+  }, [data, generateRandomPrices]);
   const calcTotalPrice = () => {
     //The reduce method is used to iterate over an array and accumulate a single value based on the elements of the array.
     return (

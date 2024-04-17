@@ -23,7 +23,7 @@ interface Item {
   price: string;
 }
 
-export default function page({}: Props) {
+export default function Page({}: Props) {
   const [shoppingCart, setShoppingCart] = useState<
     { item: Item; quantity: number }[]
   >([]);
