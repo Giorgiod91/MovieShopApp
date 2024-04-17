@@ -1,4 +1,7 @@
-# Next.js & NextUI Template
+# MovieShopApp
+Created a MovieShop webapp with Stripe payments
+Next js 13
+![image](https://github.com/Giorgiod91/MovieShopApp/assets/109972616/98ed24be-51b1-4814-aa53-b696e5a4a9b1)
 
 This is a template for creating applications using Next.js 13 (app directory) and NextUI (v2).
 
