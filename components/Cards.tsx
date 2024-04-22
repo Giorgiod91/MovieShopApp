@@ -169,12 +169,23 @@ export default function Cards2({
   const uniqueCartItemTitles = [
     ...new Set(shoppingCart.map((cartItem) => cartItem.item.title)),
   ];
-  const cartModal = (
+ const cartModal = (
     <div className={`cart-modal ${isCartOpen ? "open" : ""}`}>
-      <div className="cart-content" style={{ width: "400px", height: "500px" }}>
-        <h2 className="text-4xl">Shopping Cart</h2>
-        <br />
-        <ul className="flex flex-col">
+      <div
+        className="cart-content space-y-5 flex flex-col border-4 border-black "
+        style={{ width: "800px", height: "500px" }}
+      >
+        <div className="flex text-2xl font-semibold  justify-center">
+          <h2 className="">Shopping Cart</h2>
+        </div>
+        <div className="flex justify-between bg-red-200 hover:border-red-600 border-4 border-black p-5">
+          <p className="justify-start"> Movie</p>
+          <p className="pr-14"> Title</p>
+          <p className="">Quantity</p>
+          <p>Remove</p>
+        </div>
+
+        <ul>
           {uniqueCartItemTitles.map((cartItemTitle, index) => {
             const cartItem = shoppingCart.find(
               (item) => item.item.title === cartItemTitle
@@ -182,32 +193,33 @@ export default function Cards2({
             const itemData = data.find((item) => item.title === cartItemTitle);
 
             return (
-              <div key={index}>
-                <li key={index}>
-                  <div className=" text-2xl">{cartItemTitle}</div>
-                  <br />
-                  {itemData && (
+              <li key={index} className="relative flex items-center  ">
+                {itemData && (
+                  <div className="flex p-2">
                     <img
-                      src={baseUrl + (itemData.poster_path || "")}
+                      src={baseUrl + itemData.poster_path}
                       alt={cartItemTitle}
-                      className="cart-item-image"
+                      className="cart-item-image  "
                     />
-                  )}
-                  <br /> - Quantity: {cartItem?.quantity || 0}
-                  <button
-                    onClick={() => removeItemFromCart(cartItemTitle)}
-                    className="text-red-500 ml-2"
-                  >
-                    Remove
-                  </button>
-                </li>
-                <br />
-              </div>
+                  </div>
+                )}
+                <p className="flex-grow pl-40">{cartItemTitle}</p>
+
+                <p className=" pr-40"> {cartItem?.quantity || 0}</p>
+                <button
+                  c
+                  onClick={() => removeItemFromCart(cartItemTitle)}
+                  className="text-red-500  justify-end border-4 border-red-200 hover:border-4 hover:bg-red-400 hover:text-white ml-2 font-bold"
+                >
+                  Remove
+                </button>
+              </li>
             );
           })}
         </ul>
-        <p className=" sticky bottom-0">Total: ${calcTotalPrice()}</p>
+        <p className="font-semibold">Total: ${calcTotalPrice()}</p>
       </div>
+
       <button className="close-button" onClick={() => setIsCartOpen(false)}>
         Close
       </button>
